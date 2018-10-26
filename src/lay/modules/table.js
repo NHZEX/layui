@@ -1845,11 +1845,12 @@ layui.define(['laytpl', 'laypage', 'layer', 'form', 'util'], function(exports){
             }
           });
         }
-        ,delayAnimation: function (colour, call, delay = 0.3) {
+        ,delayAnimation: function (colour, call, delay) {
           //延迟刷新删除动画效果
-          tr.css('-webkit-transition', `background-color ${delay}s linear`);
-          tr.css('-moz-transition:',`background-color ${delay}s linear`);
-          tr.css('transition:',`background-color ${delay}s linear`);
+          if(!delay) delay = 0.3;
+          tr.css('-webkit-transition', 'background-color '+delay+'s linear');
+          tr.css('-moz-transition:','background-color '+delay+'s linear');
+          tr.css('transition:','background-color '+delay+'s linear');
           tr.css('background-color', colour);
           clearInterval(that.delayAnimationTime);
           if($.isFunction(call)){
