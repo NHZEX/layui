@@ -55,6 +55,40 @@ layui.define(['laytpl', 'laypage', 'layer', 'form', 'util'], function(exports){
     }
     
     return {
+      //覆盖本地数据并重新渲染
+      renderData: function (data) {
+        that._renderLocalData.call(that, data);
+      }
+      //追加本地数据并重新渲染
+      ,appendData: function (data) {
+        that._addLocalData.call(that, data);
+      }
+      //获取持久勾选存储的选中主键ID
+      ,checkData: function () {
+        return that._checkIndex();
+      }
+      ,selectIsEmpty: function (val) {
+        return that._selectIsEmpty(val);
+      }
+      //依据主键ID/或指定键 获取匹配到的第第一个数据(数据基于当前页)
+      ,rowData: function (val, field) {
+        return that._rowDataByPrimary(val, field);
+      }
+      //依据主键ID/或指定键 获取匹配到的第全部行数据(数据基于当前页)
+      ,rowDatas: function (val, field) {
+        return that._rowDatasByPrimary(val, field);
+      }
+      //刷新(当前页/指定页)的(远程/本地)数据
+      ,refresh: function (curr) {
+        that._refreshData.call(that, curr);
+      }
+      ,setParams: function (where) {
+        that._SetParams(where);
+      }
+      //获取行对象
+      ,getRowObj: function (id) {
+        return that._getRowObjByPrimary(id);
+      },
       //重载整个表格
       reload: function(options){
         that.reload.call(that, options);
