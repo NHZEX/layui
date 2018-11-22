@@ -257,7 +257,7 @@ layui.define(['laytpl', 'laypage', 'layer', 'form', 'util'], function(exports){
   ,Class = function(options){
     var that = this;
     that.index = ++table.index;
-    that.config = $.extend({}, that.config, table.config, options);
+    that.config = $.extend(true, {}, that.config, table.config, options);
     //创建选中存储
     table.check[that.config.id] = [];
     that.render();
@@ -784,9 +784,17 @@ layui.define(['laytpl', 'laypage', 'layer', 'form', 'util'], function(exports){
       }
   };
 
-  Class.prototype._SetParams = function (where) {
+  Class.prototype._SetParams = function (where, cover) {
       var that = this;
-      that.config.where = where;
+      var config = that.config;
+      cover || (cover = false);
+      if (null === where) {
+        config.where = {};
+      } else if(cover) {
+        config.where = $.extend(true, {}, where);
+      } else {
+        config.where = $.extend(true, config.where, where);
+      }
   };
 
   //刷新(当前页/指定页)的(远程/本地)数据
