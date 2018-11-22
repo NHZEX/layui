@@ -83,7 +83,7 @@ layui.define(['laytpl', 'laypage', 'layer', 'form', 'util'], function(exports){
         that._refreshData.call(that, curr);
       }
       ,setParams: function (where) {
-        that._SetParams(where);
+        that._setParams(where);
       }
       //获取行对象
       ,getRowObj: function (id) {
@@ -784,7 +784,7 @@ layui.define(['laytpl', 'laypage', 'layer', 'form', 'util'], function(exports){
       }
   };
 
-  Class.prototype._SetParams = function (where, cover) {
+  Class.prototype._setParams = function (where, cover) {
       var that = this;
       var config = that.config;
       cover || (cover = false);
