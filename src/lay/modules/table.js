@@ -82,8 +82,8 @@ layui.define(['laytpl', 'laypage', 'layer', 'form', 'util'], function(exports){
       ,refresh: function (curr) {
         that._refreshData.call(that, curr);
       }
-      ,setParams: function (where) {
-        that._setParams(where);
+      ,setParams: function (where, cover) {
+        that._setParams(where, cover);
       }
       //获取行对象
       ,getRowObj: function (id) {
