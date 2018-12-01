@@ -47,6 +47,10 @@ layui.define('layer', function(exports){
           /(^\d{15}$)|(^\d{17}(x|X|\d)$)/
           ,'请输入正确的身份证号'
         ]
+        ,positiveInteger: [
+          /^\+?[0-9]+$/
+          ,'请输入非负整数'
+        ]
       }
     };
   };
