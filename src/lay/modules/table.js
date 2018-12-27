@@ -259,7 +259,7 @@ layui.define(['laytpl', 'laypage', 'layer', 'form', 'util'], function(exports){
     that.index = ++table.index;
     that.config = $.extend(true, {}, that.config, table.config, options);
     //创建选中存储
-    table.check[that.config.id] = [];
+    table.check[that.index] = [];
     that.render();
   };
   
@@ -681,7 +681,7 @@ layui.define(['laytpl', 'laypage', 'layer', 'form', 'util'], function(exports){
   Class.prototype._checkIndex = function () {
       var that = this
           ,options = that.config
-          ,thisCheck = table.check[that.key];
+          ,thisCheck = table.check[that.index];
       return thisCheck;
   };
 
@@ -895,7 +895,7 @@ layui.define(['laytpl', 'laypage', 'layer', 'form', 'util'], function(exports){
     ,render = function(){ //后续性能提升的重点
       var thisCheckedRowIndex;
       //获取选中存储
-      var thisCheck = table.check[that.key];
+      var thisCheck = table.check[that.index];
       if(!sort && that.sortKey){
         return that.sort(that.sortKey.field, that.sortKey.sort, true);
       }
@@ -1239,7 +1239,7 @@ layui.define(['laytpl', 'laypage', 'layer', 'form', 'util'], function(exports){
   Class.prototype._storageCheck = function (rowData, checked) {
       var that = this
           ,options = that.config
-          ,thisCheck = table.check[that.key];
+          ,thisCheck = table.check[that.index];
 
       if(true !== options.memory) return;
 
@@ -1266,7 +1266,7 @@ layui.define(['laytpl', 'laypage', 'layer', 'form', 'util'], function(exports){
       var that = this
           ,options = that.config;
 
-      table.check[that.key] = [];
+      table.check[that.index] = [];
       if(rendering){
           that.layHeader.find('input[name="layTableCheckbox"]').prop('checked', false);
           that.eachCols(function(i, item){
