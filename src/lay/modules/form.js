@@ -374,6 +374,9 @@ layui.define('layer', function(exports){
 
             othis.siblings().removeClass(THIS);
             select.val(value).removeClass('layui-form-danger')
+
+            // 恢复事件传递
+            select.trigger('change');
             layui.event.call(this, MOD_NAME, 'select('+ filter +')', {
               elem: select[0]
               ,value: value
@@ -465,7 +468,9 @@ layui.define('layer', function(exports){
               check[0].checked = true
               ,reElem.addClass(RE_CLASS[1]).find('em').text(text[0])
             );
-            
+
+            // 恢复事件传递
+            check.trigger('change');
             layui.event.call(check[0], MOD_NAME, RE_CLASS[2]+'('+ filter +')', {
               elem: check[0]
               ,value: check[0].value
@@ -537,7 +542,9 @@ layui.define('layer', function(exports){
             radio[0].checked = true;
             reElem.addClass(CLASS+'ed');
             reElem.find('.layui-icon').addClass(ANIM).html(ICON[0]);
-            
+
+            // 恢复事件传递
+            radio.trigger('change');
             layui.event.call(radio[0], MOD_NAME, 'radio('+ filter +')', {
               elem: radio[0]
               ,value: radio[0].value
