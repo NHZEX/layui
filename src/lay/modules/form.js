@@ -684,8 +684,8 @@ layui.define('layer', function(exports){
   });
   
   //表单提交事件
-  $dom.on('submit', ELEM, submit)
-  .on('click', '*[lay-submit]', submit);
+  $dom.off('.layui-form-private').on('submit.layui-form-private', ELEM, submit)
+      .on('click.layui-form-private', '*[lay-submit]', submit);
   
   exports(MOD_NAME, form);
 });
