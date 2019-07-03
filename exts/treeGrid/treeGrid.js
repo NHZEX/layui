@@ -853,6 +853,10 @@ layui.config({}).extend({}).define(['laytpl', 'laypage', 'layer', 'form'], funct
 				reload: function(options) {
 					that.reload.call(that, options);
 				},
+        //刷新(当前页/指定页)的(远程/本地)数据
+        refresh: function (curr) {
+          that.refreshData.call(that, curr);
+        },
 				config: options
 			}
 		}
@@ -1680,6 +1684,12 @@ layui.config({}).extend({}).define(['laytpl', 'laypage', 'layer', 'form'], funct
 			return temTreeHtml;
 		}
 	}
+  //刷新(当前页/指定页)的(远程/本地)数据
+  Class.prototype.refreshData = function (newCurr) {
+    var that = this
+      ,curr = newCurr || that.page;
+    that.pullData(curr,that.loading());
+  };
 	//获得数据
 	Class.prototype.pullData = function(curr, loadIndex) {
 		var that = this,
@@ -2529,7 +2539,7 @@ layui.config({}).extend({}).define(['laytpl', 'laypage', 'layer', 'form'], funct
 					that.fullHeightGap = options.height.split('-')[1];
 				}
 			}
-			options.height = th - that.fullHeightGap;
+			options.calcHeight = th - that.fullHeightGap;
 		}
 	};
 	/**
@@ -2538,7 +2548,7 @@ layui.config({}).extend({}).define(['laytpl', 'laypage', 'layer', 'form'], funct
 	Class.prototype.resizeHeight = function() {
 		var that = this,
 			options = that.config,
-			height = options.height,
+			height = options.calcHeight,
 			bodyHeight;
 		if (height < 135) height = 135;
 		that.elem.css('height', height);
@@ -2742,7 +2752,7 @@ layui.config({}).extend({}).define(['laytpl', 'laypage', 'layer', 'form'], funct
 
 			layer.close(that.tipsIndex);
 		});
-		_WIN.unbind('resize').on('resize', function() { //自适应
+		_WIN.unbind('resize.layui-treeGrid').on('resize.layui-treeGrid', function() { //自适应
 			that.resize();
 		});
 	};
